@@ -1,14 +1,23 @@
 package com.prophet.prophetapi.controllers;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prophet.prophetapi.model.Car;
+import com.prophet.prophetapi.services.CarService;
 
 
 @RestController
@@ -16,18 +25,36 @@ import javax.validation.constraints.*;
 @Validated
 class Search {
 
+    @Autowired
+    private ObjectMapper jsonObjectMapper;
+
+    @Autowired
+    private CarService carService;
+
     @GetMapping()
     @ResponseBody
-    public String SearchAll(){
-        return "Hello";
+    public ResponseEntity<String> SearchAll(){
+       return new ResponseEntity<String>(" { Status: Ok, Message: 'How are you?' }", HttpStatus.OK);
     }
 
     @GetMapping("/multiply/{number}")
     @ResponseBody
-    public String Multiply(@PathVariable("number") @DecimalMax(value = "10", message = "please enter a number with a maximum of 10 digits") @NotBlank String number){
+    public ResponseEntity<String> Multiply(@PathVariable("number")  @NotBlank String number){
         Long result = Long.parseLong(number);
-        return String.format("%d", result*result);
+        if (result.toString().length() <= 4){
+            result = result * result;
+            return new ResponseEntity<String>(String.format("{ Status: OK, Message: '%s squared is %s' }", number, result), HttpStatus.OK);
+        } else return new ResponseEntity<String>("ERROR: Please pass a number that 4 digits or less for performance reasons", HttpStatus.BAD_REQUEST);
+        
+    }
 
+    @GetMapping("/cars")
+    @ResponseBody
+    public ResponseEntity<String> SearchAllCars() throws JsonProcessingException{
+
+        List<Car> carList = carService.GetAllCars();
+        return new ResponseEntity<String>(jsonObjectMapper.writeValueAsString(carList), HttpStatus.OK);
+        
 
     }
 
