@@ -63,7 +63,7 @@ class SearchController {
     public ResponseEntity<String> SearchAllCars() throws JsonProcessingException {
 
         List<Car> carList = carService.GetAllCars();
-        log.warn("Hello");
+        log.info("Received request for 'SearchAllCars' endpoint");
         return new ResponseEntity<String>(jsonObjectMapper.writeValueAsString(carList), HttpStatus.OK);
 
     }
