@@ -26,15 +26,4 @@ jobs:
 
       # Step 3: Build and test the project
       - name: Build and run tests
-        run: mvn clean install -DskipTests=false
-
-      - name: Generate HTML Test Reports
-        run: |
-          mvn surefire-report:report-only
-          mvn site -DgenerateReports=false # Generates reports without creating full project documentation
-
-      - name: Deploy Test Reports to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site/surefire-report.html
+        run: mvn clean install -B -q -fae --no-transfer-progress -DskipTests=false
