@@ -26,4 +26,4 @@ jobs:
 
       # Step 3: Build and test the project
       - name: Build and run tests
-        run: mvn clean install -B -q -fae --no-transfer-progress -DskipTests=false
+        run: mvn clean install -B -fae --no-transfer-progress -DskipTests=false
