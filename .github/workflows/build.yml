@@ -38,10 +38,10 @@ jobs:
       # Step to debug directory structure
       - name: List generated site files
         run: ls -R target
-      # Step to move surefire-report.html to index.html
-#      - name: Prepare Pages for Deployment
-#        run: |
-#          mv target/site/surefire-report.html target/site/index.html
+#       Step to move surefire-report.html to index.html
+      - name: Prepare Pages for Deployment
+        run: |
+          mv target/reports/surefire.html target/site/index.html
 
       # Step 6: Upload Test Results as an Unzipped Artifact
       - name: Upload test results (uncompressed)
