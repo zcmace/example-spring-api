@@ -27,3 +27,7 @@ jobs:
       # Step 3: Build and test the project
       - name: Build and run tests
         run: mvn clean install -B -fae --no-transfer-progress -DskipTests=false
+
+      # Step 4: Checkstyles
+      - name: Checkstyles
+        run: mvn checkstyle:check -Dcheckstyle.config.location=checkstyles.xml
