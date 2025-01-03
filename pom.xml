@@ -23,6 +23,11 @@
       <version>8.0.1.Final</version>
     </dependency>
     <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
+      <version>4.0.2</version> <!-- Provides Jakarta Expression Language implementation -->
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>

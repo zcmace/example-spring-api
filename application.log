@@ -3,3 +3,10 @@
 2025-01-03 14:30:01 [main] INFO  c.p.p.ProphetApiApplicationTests - No active profile set, falling back to 1 default profile: "default"
 2025-01-03 14:30:02 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
 2025-01-03 14:30:02 [main] INFO  c.p.p.ProphetApiApplicationTests - Started ProphetApiApplicationTests in 1.858 seconds (JVM running for 3.667)
+2025-01-03 16:22:46 [main] INFO  c.p.p.c.PropertyControllerTest - Starting PropertyControllerTest using Java 22.0.1 on PC-7C61205A19 with PID 37256 (started by Zach in C:\Users\Zach\Desktop\Development\GithubRepos\example-spring-api)
+2025-01-03 16:22:46 [main] DEBUG c.p.p.c.PropertyControllerTest - Running with Spring Boot v2.7.1, Spring v5.3.21
+2025-01-03 16:22:46 [main] INFO  c.p.p.c.PropertyControllerTest - No active profile set, falling back to 1 default profile: "default"
+2025-01-03 16:22:47 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2025-01-03 16:22:47 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2025-01-03 16:22:47 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2025-01-03 16:22:47 [main] INFO  c.p.p.c.PropertyControllerTest - Started PropertyControllerTest in 1.413 seconds (JVM running for 1.97)
