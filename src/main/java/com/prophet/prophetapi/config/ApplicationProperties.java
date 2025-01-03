@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Setter
 public class ApplicationProperties {
 
-    private String exampleHost;
-    private String examplePort;
-    private String exampleTimeout;
-
+  private String exampleHost;
+  private String examplePort;
+  private String exampleTimeout;
 }

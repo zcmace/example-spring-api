@@ -19,7 +19,7 @@ class CarServiceTest {
 
     @Test
     void getAllCars() {
-        List<Car> cars = carService.GetAllCars();
+        List<Car> cars = carService.getAllCars();
 
         // Assert the size of the list is 5
         assertEquals(5, cars.size());
