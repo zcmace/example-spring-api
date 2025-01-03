@@ -37,4 +37,4 @@ jobs:
           path: target/surefire-reports/*.xml
 
       - name: Checkstyle Validation (Optional)
-        run: mvn checkstyle:check
+        run: mvn checkstyle:check -Dcheckstyle.config.location=checkstyles.xml
