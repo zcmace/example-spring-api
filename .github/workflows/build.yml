@@ -35,13 +35,18 @@ jobs:
           mvn site -DgenerateReports=false
         # Generates HTML reports
 
+      # Step to move surefire-report.html to index.html
+      - name: Prepare Pages for Deployment
+        run: |
+          mv target/site/surefire-report.html target/site/index.html
+
       # Step 6: Upload Test Results as an Unzipped Artifact
       - name: Upload test results (uncompressed)
         uses: actions/upload-pages-artifact@v1
         with:
           path: target/site
 
-  deploy:
+  deploy-test-results:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
