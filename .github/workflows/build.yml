@@ -35,6 +35,9 @@ jobs:
           mvn site -DgenerateReports=false
         # Generates HTML reports
 
+      # Step to debug directory structure
+      - name: List generated site files
+        run: ls -R target/site
       # Step to move surefire-report.html to index.html
       - name: Prepare Pages for Deployment
         run: |
