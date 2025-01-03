@@ -24,42 +24,17 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      # Step 4: Build and test the project
+      # Step 3: Build and test the project
       - name: Build and run tests
-        run: mvn clean install
+        run: mvn clean install -DskipTests=false
 
-      # Step 5: Generate Surefire test report (HTML)
-      - name: Generate Surefire Test Report
+      - name: Generate HTML Test Reports
         run: |
           mvn surefire-report:report-only
-          mvn site -DgenerateReports=false
-        # Generates HTML reports
+          mvn site -DgenerateReports=false # Generates reports without creating full project documentation
 
-      # Step to debug directory structure
-      - name: List generated site files
-        run: ls -R target
-#       Step to move surefire-report.html to index.html
-      - name: Prepare Pages for Deployment
-        run: |
-          mv target/reports/surefire.html target/site/index.html
-
-      # Step 6: Upload Test Results as an Unzipped Artifact
-      - name: Upload test results (uncompressed)
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: target/site
-
-  deploy-test-results:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    steps:
-      # Step 1: Checkout repository code
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      # Step 2: Deploy to GitHub Pages
       - name: Deploy Test Reports to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: target/site
+          publish_dir: target/site/surefire-report.html
