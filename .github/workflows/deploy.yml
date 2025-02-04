@@ -65,11 +65,13 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
             
             # Stop the running container (if exists) to avoid port conflicts
-            docker stop spring-boot-app || true && docker rm spring-boot-app || true
+            docker stop spring_app || true && docker rm spring_app || true
             
             # Run the new container
-            docker run -d --name spring-boot-app \
-              -p 8081:8080 \
-              -e SPRING_PROFILES_ACTIVE=dev \
-              -v "$HOME/Configurations:/home/appuser/Configurations"
-              ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
+            docker run -d --name spring_app \
+            -p 8080:8080 \
+            -e SPRING_PROFILES_ACTIVE=${{ inputs.environment }} \
+            -v "$HOME/Configurations:/home/appuser/Configurations" \
+            -e VIRTUAL_HOST=${{ secrets.NGINX_HOST }} \
+            -e LETSENCRYPT_HOST=${{ secrets.NGINX_HOST }} \
+            -e LETSENCRYPT_EMAIL=${{ secrets.NGINX_EMAIL }} ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
