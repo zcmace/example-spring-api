@@ -154,6 +154,26 @@
           </includes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.3.0</version> <!-- Use the latest version -->
+        <executions>
+          <execution>
+            <phase>validate</phase> <!-- Runs Checkstyle during validate phase -->
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- Define the location of the checkstyle rules file -->
+          <configLocation>${basedir}/checkstyles.xml</configLocation>
+          <failOnViolation>true</failOnViolation> <!-- Fails the build on violations -->
+          <linkXRef>false</linkXRef>
+          <violationSeverity>warning</violationSeverity>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

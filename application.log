@@ -1,7 +1,0 @@
-2025-01-14 19:33:15 [main] INFO  c.p.p.c.PropertyControllerTest - Starting PropertyControllerTest using Java 22.0.1 on PC-7C61205A19 with PID 26564 (started by Zach in C:\Users\Zach\Desktop\Development\GithubRepos\example-spring-api)
-2025-01-14 19:33:15 [main] DEBUG c.p.p.c.PropertyControllerTest - Running with Spring Boot v2.7.1, Spring v5.3.21
-2025-01-14 19:33:15 [main] INFO  c.p.p.c.PropertyControllerTest - No active profile set, falling back to 1 default profile: "default"
-2025-01-14 19:33:16 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
-2025-01-14 19:33:16 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2025-01-14 19:33:16 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
-2025-01-14 19:33:16 [main] INFO  c.p.p.c.PropertyControllerTest - Started PropertyControllerTest in 1.545 seconds (JVM running for 2.223)
