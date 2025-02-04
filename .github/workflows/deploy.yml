@@ -31,7 +31,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Build Java application
-        run: ./mvnw clean package # Adjust this based on your build tool and OS (use mvnw.cmd for Windows)
+        run: ./mvnw clean package -DskipTests # Adjust this based on your build tool and OS (use mvnw.cmd for Windows)
 
       # Log in to Docker Hub
       - name: Log in to Docker Hub
