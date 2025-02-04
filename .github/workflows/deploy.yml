@@ -27,6 +27,9 @@ jobs:
           java-version: '21' # Change to your desired JDK version
 
       # Build the Java application
+      - name: Grant execute permission to Maven wrapper
+        run: chmod +x ./mvnw
+
       - name: Build Java application
         run: ./mvnw clean package # Adjust this based on your build tool and OS (use mvnw.cmd for Windows)
 
