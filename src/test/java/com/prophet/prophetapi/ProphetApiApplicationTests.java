@@ -11,6 +11,7 @@ class ProphetApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
