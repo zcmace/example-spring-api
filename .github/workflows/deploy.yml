@@ -1,0 +1,55 @@
+name: CI/CD Pipeline to VPS
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Java environment
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21' # Change to your desired JDK version
+
+      # Build the Java application
+      - name: Build Java application
+        run: ./mvnw clean package # Adjust this based on your build tool and OS (use mvnw.cmd for Windows)
+
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # Build Docker image
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest .
+
+      # Push Docker image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
+
+      # Deploy to VPS
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            # Pull the latest Docker image
+            docker pull ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
+            
+            # Stop the running container (if exists) to avoid port conflicts
+            docker stop spring-boot-app || true && docker rm spring-boot-app || true
+            
+            # Run the new container
+            docker run -d --name spring-boot-app \
+              -p 8081:8080 \
+              -e SPRING_PROFILES_ACTIVE=dev \
+              -v "$HOME/Configurations:/home/appuser/Configurations"
+              ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
