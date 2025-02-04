@@ -70,6 +70,7 @@ jobs:
             # Run the new container
             docker run -d --name spring_app \
             -p 8080:8080 \
+            --network docker-nginx_proxy-network \
             -e SPRING_PROFILES_ACTIVE=${{ inputs.environment }} \
             -v "$HOME/Configurations:/home/appuser/Configurations" \
             -e VIRTUAL_HOST=${{ secrets.NGINX_HOST }} \
