@@ -45,13 +45,20 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/example-spring-api:latest
 
+      #Setup auth to VPS
+      - name: Write SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.VPS_IP }}" > ~/.ssh/known_hosts
+
       # Deploy to VPS
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v0.1.9
         with:
           host: ${{ secrets.VPS_IP }}
           username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_SSH_PASSWORD }}
           port: 22
           script: |
             # Pull the latest Docker image
